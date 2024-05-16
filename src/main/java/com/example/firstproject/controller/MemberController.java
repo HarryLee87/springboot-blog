@@ -3,11 +3,13 @@ package com.example.firstproject.controller;
 import com.example.firstproject.dto.MemberForm;
 import com.example.firstproject.entity.Members;
 import com.example.firstproject.repository.MembersRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+@Slf4j
 @Controller
 public class MemberController {
     @Autowired
@@ -20,14 +22,20 @@ public class MemberController {
 
     @PostMapping("/members/join")
     public String createMember(MemberForm form){
-        System.out.println(form.toString());
+        log.info(form.toString());
+//        System.out.println(form.toString());
+
         // TODO: Transfer the DTO to an Entity
         Members members = form.toEntity();
-        System.out.println(members.toString());
+        log.info(members.toString());
+//        System.out.println(members.toString());
+
         // TODO: store the Entity into DB via repository
         Members members1 = membersRepository.save(members);
-        System.out.println(members1.toString());
+        log.info(members1.toString());
+//        System.out.println(members1.toString());
         return "";
+
     }
 
 }
