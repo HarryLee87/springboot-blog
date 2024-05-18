@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.Iterator;
 import java.util.Optional;
 
 @Slf4j
@@ -54,5 +55,17 @@ public class ArticleController {
 
         //TODO: 3. return view page
         return "articles/show";
+    }
+
+    @GetMapping("/articles")
+    public String index(Model model){
+        //TODO: 1. Fetch all data
+        Iterable<Article> articleEntityList = articleRepository.findAll();
+
+        //TODO: 2. store the data in model
+        model.addAttribute("articleList", articleEntityList);
+
+        //TODO: 3. set view page
+        return "articles/index";
     }
 }
