@@ -11,9 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.Iterator;
-import java.util.Optional;
-
 @Slf4j
 @Controller
 public class ArticleController {
@@ -40,7 +37,7 @@ public class ArticleController {
         log.info(saved.toString());
 //        System.out.println(saved.toString());
 
-        return "";
+        return "redirect:/articles/" + saved.getId();
     }
 
     @GetMapping("/articles/{id}")

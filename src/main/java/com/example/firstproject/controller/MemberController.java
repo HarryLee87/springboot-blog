@@ -11,15 +11,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.lang.reflect.Member;
-
 @Slf4j
 @Controller
 public class MemberController {
     @Autowired
     private MembersRepository membersRepository;
 
-    @GetMapping("/members/new")
+    @GetMapping("/signup")
     public String newMemberForm(){
         return "members/new";
     }
@@ -30,15 +28,15 @@ public class MemberController {
 //        System.out.println(form.toString());
 
         // TODO: Transfer the DTO to an Entity
-        Members members = form.toEntity();
-        log.info(members.toString());
+        Members member = form.toEntity();
+        log.info(member.toString());
 //        System.out.println(members.toString());
 
         // TODO: store the Entity into DB via repository
-        Members members1 = membersRepository.save(members);
-        log.info(members1.toString());
+        Members newMember = membersRepository.save(member);
+        log.info(member.toString());
 //        System.out.println(members1.toString());
-        return "";
+        return "redirect:/members/" + newMember.getId();
     }
     
     @GetMapping("/members/{id}")
