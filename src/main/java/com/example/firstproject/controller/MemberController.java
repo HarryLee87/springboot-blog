@@ -53,7 +53,23 @@ public class MemberController {
         Iterable<Members> membersEntityList = membersRepository.findAll();
         model.addAttribute("memberList", membersEntityList);
         return "members/index";
+    }
 
+    @GetMapping("/members/{id}/edit")
+    public String edit(@PathVariable Long id, Model model){
+        Members memberEntity = membersRepository.findById(id).orElse(null);
+        model.addAttribute("member", memberEntity);
+        return "members/edit";
+    }
+
+    @PostMapping("/members/update")
+    public String update(MemberForm form) {
+        Members memberEntity = form.toEntity();
+        Members target = membersRepository.findById(memberEntity.getId()).orElse(null);
+        if(target != null){
+            membersRepository.save(memberEntity);
+        }
+        return "redirect:/members/" + memberEntity.getId();
     }
 
 }

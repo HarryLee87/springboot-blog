@@ -7,6 +7,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class MemberForm {
+    private Long id;
     private String email;
     private String password;
 
@@ -24,6 +25,6 @@ public class MemberForm {
 //    }
 
     public Members toEntity() {
-        return new Members(null, email, password);
+        return new Members(id, email, password);
     }
 }
